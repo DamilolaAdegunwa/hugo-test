@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://hopeful-albattani-1e4976.netlify.app/"
 canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
