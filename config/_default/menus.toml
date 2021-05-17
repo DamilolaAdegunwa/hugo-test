@@ -1,24 +1,54 @@
 [[docs]]
-  name = "Prologue"
+  name = "Welcome"
   weight = 10
-  identifier = "prologue"
-  url = "/docs/prologue/"
+  identifier = "welcome"
+  url = "/docs/welcome/"
 
 [[docs]]
-  name = "Start"
+  name = "Marketplace API"
   weight = 20
-  identifier = "start"
-  url = "/docs/start/"
+  identifier = "graphql"
+  url = "/docs/graphql/"
+
+[[docs]]
+  name = "Seller API"
+  weight = 30
+  identifier = "v2"
+  url = "/docs/v2/"
+
+[[docs]]
+  name = "Webhooks"
+  weight = 40
+  identifier = "webhooks"
+  url = "/docs/webhooks/"
+
+[[docs]]
+  name = "Changelog"
+  weight = 50
+  identifier = "changelog"
+  url = "/docs/changelog/"
+
+[[docs]]
+  name = "Glossary"
+  weight = 50
+  identifier = "glossary"
+  url = "/docs/glossary/"
+
 
 [[main]]
   name = "Docs"
-  url = "/docs/prologue/introduction/"
+  url = "/docs/welcome/introduction/"
   weight = 10
+
+[[main]]
+  name = "FAQ"
+  url = "/faq/"
+  weight = 20
 
 [[main]]
   name = "Blog"
   url = "/blog/"
-  weight = 20
+  weight = 30
 
 [[social]]
   name = "Twitter"

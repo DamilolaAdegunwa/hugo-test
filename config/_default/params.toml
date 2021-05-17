@@ -36,11 +36,11 @@ portraitPhotoWidths = [800, 700, 600, 500]
 lqipWidth = "20x"
 
 # Footer
-footer = "Made by Marketplacer."
+footer = "Made by FakeCo."
 
 # Alert
 alert = false
-alertText = "Made by Marketplacer."
+alertText = "Made by FakeCo."
 
 # Edit Page
 docsRepo = "https://github.com/h-enk/doks"
@@ -53,6 +53,6 @@ editPage = false
   flexSearch = true
   darkMode = true
   bootStrapJs = false
-  breadCrumb = false
+  breadCrumb = true
   highLight = true
   kaTex = false
