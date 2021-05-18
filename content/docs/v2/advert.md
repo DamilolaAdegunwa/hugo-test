@@ -35,8 +35,65 @@ You can also filter to only return adverts whose variants have a particular valu
 
 ### Response
 
-<%= headers 200 %>
-<%= collection [advert], included: [taxon, brand], pagination: "/api/v2/client/adverts" %>
+<div class="alert alert-success" role="alert">
+  Status 200 OK
+</div>
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "adverts",
+      "attributes": {
+        "title": "Giant Cypress DX",
+        "description": "Smooth-rolling 700c wheels give Cypress...",
+        "price": "499.0",
+        "published": true,
+        "sale_type": "classified",
+        "sale_price": "350.0",
+        "code": "ABC1234",
+        "youtube_video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "features": {
+        }
+      },
+      "relationships": {
+        "taxon": {
+          "data": {
+            "type": "taxons",
+            "id": 1
+          }
+        },
+        "brand": {
+          "data": {
+            "type": "brands",
+            "id": 1
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": 1,
+      "type": "taxons",
+      "attributes": {
+        "name": "Hybrid Bikes",
+        "tree_name": "Bikes - Hybrid Bikes",
+        "slug": "hybrid-bikes"
+      }
+    },
+    {
+      "id": 1,
+      "type": "brands",
+      "attributes": {
+        "name": "Giant",
+        "slug": "giant"
+      }
+    }
+  ]
+}
+```
 
 ## Get a single advert
 
@@ -52,9 +109,7 @@ You may also opt to include the variants, shipping dimensions, secondary taxons,
 
 ### Response
 
-<div class='note'>
-  The response shown below contains variants, shipping dimensions, and secondary taxons, which are <em>not</em> included by default.
-</div>
+{{< alert icon="👉" text="The response shown below contains variants, shipping dimensions, and secondary taxons, which are <em>not</em> included by default." >}}
 
 <div class="alert alert-success" role="alert">
   Status 200 OK
@@ -64,9 +119,61 @@ You may also opt to include the variants, shipping dimensions, secondary taxons,
 ```json
 {
   "links": {
-    "self": "https://bikeexchange.com.au/api/v2/client/variants/1"
+    "self": "https://bikeexchange.com.au/api/v2/client/adverts/1"
   },
-  "data": [
+  "data": {
+    "id": 1,
+    "type": "adverts",
+    "attributes": {
+      "title": "Giant Cypress DX",
+      "description": "Smooth-rolling 700c wheels give Cypress...",
+      "price": "499.0",
+      "published": true,
+      "sale_type": "classified",
+      "sale_price": "350.0",
+      "code": "ABC1234",
+      "youtube_video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "features": {
+      }
+    },
+    "relationships": {
+      "variants": {
+        "data": [
+          {
+            "type": "variants",
+            "id": 1
+          }
+        ]
+      },
+      "taxon": {
+        "data": {
+          "type": "taxons",
+          "id": 1
+        }
+      },
+      "brand": {
+        "data": {
+          "type": "brands",
+          "id": 1
+        }
+      },
+      "shipping_parcel": {
+        "data": {
+          "type": "shipping_parcels",
+          "id": 1
+        }
+      },
+      "secondary_taxons": {
+        "data": [
+          {
+            "type": "taxons",
+            "id": 2
+          }
+        ]
+      }
+    }
+  },
+  "included": [
     {
       "id": 1,
       "type": "variants",
@@ -78,54 +185,35 @@ You may also opt to include the variants, shipping dimensions, secondary taxons,
         "sale_price": 15.0,
         "ean": "4003994155486",
         "upc": "9300601123456"
-      },
-      "relationships": {
-        "option_values": {
-          "data": [
-            {
-              "type": "option_values",
-              "id": 1
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "included": [
-    {
-      "id": 1,
-      "type": "option_values",
-      "attributes": {
-        "name": "Small",
-        "presentation": "Small"
-      },
-      "relationships": {
-        "option_type": {
-          "data": {
-            "type": "option_types",
-            "id": 1
-          }
-        }
       }
     },
     {
       "id": 1,
-      "type": "option_types",
+      "type": "taxons",
       "attributes": {
-        "name": "Size",
-        "presentation": "Size",
-        "feature": false,
-        "variant": true
-      },
-      "relationships": {
-        "option_values": {
-          "data": [
-            {
-              "type": "option_values",
-              "id": 1
-            }
-          ]
-        }
+        "name": "Hybrid Bikes",
+        "tree_name": "Bikes - Hybrid Bikes",
+        "slug": "hybrid-bikes"
+      }
+    },
+    {
+      "id": 1,
+      "type": "brands",
+      "attributes": {
+        "name": "Giant",
+        "slug": "giant"
+      }
+    },
+    {
+      "id": 1,
+      "type": "shipping_parcels",
+      "attributes": {
+        "weight": 5.0,
+        "width": 8.3,
+        "length": 98.3,
+        "depth": 3.5,
+        "mass_unit": "g",
+        "distance_unit": "cm"
       }
     }
   ]
@@ -138,7 +226,7 @@ Creating an advert is a multi-step process
 
 Select the appropriate taxon & brand with the API only.
 
-  1. Find the appropriate taxon and brand slugs by using the [Taxon API](/v2/taxons) and [Brand API](/v2/brands).
+  1. Find the appropriate taxon and brand slugs by using the [Taxon API](/docs/v2/taxon) and [Brand API](/docs/v2/brand).
   2. Submit the advert to `/api/v2/client/adverts` as below, using the `taxon_slug` and `brand_slug` attributes.
 
 Or, select the appropriate taxon & brand using the client admin in Marketplacer.
@@ -182,7 +270,8 @@ Name | Type | Description
 
 ### Example
 
-<%= json \
+```json
+{
   data: {
     type: "adverts",
     attributes: {
@@ -230,11 +319,13 @@ Name | Type | Description
       ]
     }
   }
-%>
+}
+```
 
 or
 
-<%= json \
+```json
+{
   data: {
     type: "adverts",
     attributes: {
@@ -254,12 +345,71 @@ or
       notes: ""
     }
   }
-%>
+}
+```
 
 ### Response
 
-<%= headers 200 %>
-<%= single_resource advert, included: [taxon, brand] %>
+<div class="alert alert-success" role="alert">
+  Status 200 OK
+</div>
+
+```json
+{
+  "links": {
+    "self": "https://bikeexchange.com.au/api/v2/client/adverts/1"
+  },
+  "data": {
+    "id": 1,
+    "type": "adverts",
+    "attributes": {
+      "title": "Giant Cypress DX",
+      "description": "Smooth-rolling 700c wheels give Cypress...",
+      "price": "499.0",
+      "published": true,
+      "sale_type": "classified",
+      "sale_price": "350.0",
+      "code": "ABC1234",
+      "youtube_video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "features": {
+      }
+    },
+    "relationships": {
+      "taxon": {
+        "data": {
+          "type": "taxons",
+          "id": 1
+        }
+      },
+      "brand": {
+        "data": {
+          "type": "brands",
+          "id": 1
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "id": 1,
+      "type": "taxons",
+      "attributes": {
+        "name": "Hybrid Bikes",
+        "tree_name": "Bikes - Hybrid Bikes",
+        "slug": "hybrid-bikes"
+      }
+    },
+    {
+      "id": 1,
+      "type": "brands",
+      "attributes": {
+        "name": "Giant",
+        "slug": "giant"
+      }
+    }
+  ]
+}
+```
 
 ## Updating an advert
 
@@ -270,25 +420,31 @@ Not supplying the key for `feature_option_values` or `secondary_taxons` will lea
 
 A request with the key below will remove all `feature_option_values` from the advert and leave `secondary_taxons` unchanged:
 
-<%= json \
+```json
+{
   relationships: {
     feature_option_values: []
   }
-%>
+}
+```
 
 A request with the key below will remove all `secondary_taxons` from the advert and leave `feature_option_values` unchanged:
 
-<%= json \
+```json
+{
   relationships: {
     secondary_taxons: []
   }
-%>
+}
+```
 
 A request with the field below won't change either relationship.
 
-<%= json \
+```json
+{
   relationships: {}
-%>
+}
+```
 
 ### Request
 
@@ -296,7 +452,8 @@ A request with the field below won't change either relationship.
 
 ### Example
 
-<%= json \
+```json
+{
   data: {
     attributes: {
       title: "Giant Cypress DX 2014",
@@ -306,12 +463,75 @@ A request with the field below won't change either relationship.
       feature_option_values: []
     }
   }
-%>
+}
+```
 
 ### Response
 
-<%= headers 200 %>
-<%= single_resource advert.merge(title: "Giant Cypress DX 2014", features: { product_features: ["Feature 1", "Feature 2"] }), included: [taxon, brand] %>
+<div class="alert alert-success" role="alert">
+  Status 200 OK
+</div>
+
+```json
+{
+  "links": {
+    "self": "https://bikeexchange.com.au/api/v2/client/adverts/1"
+  },
+  "data": {
+    "id": 1,
+    "type": "adverts",
+    "attributes": {
+      "title": "Giant Cypress DX 2014",
+      "description": "Smooth-rolling 700c wheels give Cypress...",
+      "price": "499.0",
+      "published": true,
+      "sale_type": "classified",
+      "sale_price": "350.0",
+      "code": "ABC1234",
+      "youtube_video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "features": {
+        "product_features": [
+          "Feature 1",
+          "Feature 2"
+        ]
+      }
+    },
+    "relationships": {
+      "taxon": {
+        "data": {
+          "type": "taxons",
+          "id": 1
+        }
+      },
+      "brand": {
+        "data": {
+          "type": "brands",
+          "id": 1
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "id": 1,
+      "type": "taxons",
+      "attributes": {
+        "name": "Hybrid Bikes",
+        "tree_name": "Bikes - Hybrid Bikes",
+        "slug": "hybrid-bikes"
+      }
+    },
+    {
+      "id": 1,
+      "type": "brands",
+      "attributes": {
+        "name": "Giant",
+        "slug": "giant"
+      }
+    }
+  ]
+}
+```
 
 ## Deleting an advert
 
@@ -323,4 +543,6 @@ Use this endpoint to delete an advert.
 
 ### Response
 
-<%= headers 204 %>
+<div class="alert alert-success" role="alert">
+  Status 204 No Content
+</div>

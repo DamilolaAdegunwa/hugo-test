@@ -28,12 +28,6 @@
   identifier = "changelog"
   url = "/docs/changelog/"
 
-[[docs]]
-  name = "Glossary"
-  weight = 50
-  identifier = "glossary"
-  url = "/docs/glossary/"
-
 
 [[main]]
   name = "Docs"

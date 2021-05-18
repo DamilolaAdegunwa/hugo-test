@@ -22,11 +22,11 @@ The first thing that is required to connect to the API is an API key.
 
 Your site has API keys that are accessible under the Configuration menu in the administration portal.
 
-![API link](/images/graphql/api-key.png)
+![API link](../graphql_generatekey.png)
 
 We recommend providing a description for your API key so you know what purpose it was created for. 
 
-**Please note** that when you generate an API key, the key will only be shown once. If you forget the key, you will need to generate a new key.
+{{< alert icon="👉" text="Note that when you generate an API key, the key will only be shown once. If you forget the key, you will need to generate a new key" >}}
 
 We'll make our first query to the API with the API key now.
 
@@ -34,19 +34,20 @@ We'll make our first query to the API with the API key now.
 
 We can test that our API key works by doing a search for adverts in the site. The `/graphql` endpoint on your site is used for all GraphQL queries and mutations. We can use the Insomnia client to query for adverts.
 
-![Advert Search query](/images/graphql/advert-search-query.png)
+![Advert Search query](../graphql_advertsearch.png)
 
 To authenticate to the API, use an `Authorization` header:
-![Bearer Auth](/images/graphql/bearer.png)
+
+![Bearer Auth](../graphql_bearertoken.png)
 
 If your site is currently password protected, you will not be able to supply a username/password AND an API key. If this is the case, set the username/password using basic authentication and send the API key using the `MARKETPLACER-API-KEY` header:
 
-![Basic Auth](/images/graphql/basic-auth.png)
+![Basic Auth](../graphql_marketplacerkey.png)
 
 Here we did a very simple query which asks just for the advert's title and the name of the taxon to which it is associated. A `taxon` is the category which is associated with an advert.
 
     {
-      advertSearch(attributes: {keywordQuery: "Dog"}) {
+      advertSearch(attributes: {keywordQuery: "Boots"}) {
         adverts {
           edges {
             node {
@@ -83,7 +84,7 @@ We can add additional attributes to the query and retrieve more data:
 
 The Marketplacer GraphQL API follows the [Relay Specification](https://relay.dev/graphql/connections.htm). This defines how data is returned when a one-to-many relationship is involved and is useful for paginating results. In this design, a node has attributes as well as connections to other nodes. A node represents one objects while an edge is the relationship between two nodes.
 
-![Edges and Nodes](/images/graphql/edges-nodes.png)
+![Edges and Nodes](../edges-nodes.png)
 
 In the diagram above, `Advert`, `Variant` and `Image` are all nodes and the links between the nodes are all edges. When navigating through the data structure returned by the Marketplacer GraphQL API you will need to use the node and edge concepts to get to the data you're interested in.
 
